@@ -7,10 +7,17 @@
     <title>メモ帳</title>
   </head>
   <body>
-    <div class="wrapper">
+    <div class="memocho">
       <h1>メモ帳</h1>
-      <input type="text" id="memo-input" />
-      <div id="memo-display">この中にpタグを追加して書いたメモを保存</div>
+      <input type="text" id="input-memo-text" class="memocho__textInput" />
+      <button id="button-memo-reserve" class="memocho__reserveButton">
+        保存
+      </button>
+      <div id="div-memo-display" class="memocho__memoDisplay">
+        <!-- このdivタグの中にpタグを追加して書いたメモを保存
+        <p>こんな風に</p>
+        <p>追加していく</p> -->
+      </div>
     </div>
     <script src="main.js"></script>
   </body>
