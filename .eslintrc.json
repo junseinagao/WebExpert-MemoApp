@@ -1,15 +1,26 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es6": true
     },
     "extends": [
-        "airbnb-base",
+        "eslint:recommended",
         "plugin:prettier/recommended"
     ],
+    "plugins": [
+        "html",
+        "prettier"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly",
+        "Vue": "readonly"
+    },
     "parserOptions": {
-        "ecmaVersion": 12
+        "ecmaVersion": 2018
     },
     "rules": {
+        "indent": ["error", 2],
+        "prettier/prettier": "error"
     }
 }
