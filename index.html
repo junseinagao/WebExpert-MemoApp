@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      .memocho {
+        border: solid 1px black;
+      }
+
+      .memocho__textInput {
+        margin-bottom: 1rem;
+      }
+
+      .memocho__memoDisplay {
+        background-color: pink;
+      }
+
+      .memocho__memoDisplay p {
+        margin-bottom: 1.5rem;
+      }
+    </style>
     <title>メモ帳</title>
   </head>
   <body>
@@ -19,6 +35,35 @@
         <p>追加していく</p> -->
       </div>
     </div>
-    <script src="main.js"></script>
+    <script>
+      // 必要な HTML ELEMENT を取得
+      const inputMemoText = document.getElementById("input-memo-text");
+      const buttonMemoReserve = document.getElementById("button-memo-reserve");
+      const divMemoDisplay = document.getElementById("div-memo-display");
+
+      // button が押された時のイベントを記述.
+      //    1.inputタグの中身を保存する.
+      //    2.inputタグの中身をpタグのtextContentに入れる.
+      //    3.pタグをdivタグに追加する。
+      buttonMemoReserve.onclick = function () {
+        // 1.inputタグの中身を保存する.
+        //    (inputElemnt.valueの存在をconsole.dirで探す.)
+        const memoContent = inputMemoText.value;
+
+        // 2.inputタグの中身をpタグのtextContentに入れる.
+        //    2-1.pタグを作る
+        const pTag = document.createElement("p");
+        //    2-2.pタグのtextContentにmemoContentを入れる.
+        pTag.textContent = memoContent;
+
+        //    2-3.pタグをdivタグに入れる
+        divMemoDisplay.appendChild(pTag);
+
+        // デバッグ用のconsole.log
+        console.dir(memoContent);
+        console.dir(pTag);
+        console.log(pTag.textContent);
+      };
+    </script>
   </body>
 </html>
