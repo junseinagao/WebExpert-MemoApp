@@ -55,16 +55,42 @@
       };
 
       const addMemoToNewTag = function (memoText) {
+        // divを作る.
+        const divTag = document.createElement("div");
+
         //    2-1.pタグを作る
         const pTag = document.createElement("p");
         //    2-2.pタグのtextContentにinputMemoText.valueを入れる.
         pTag.textContent = memoText;
         //    2-3.pタグをdivタグに入れる
-        divMemoDisplay.appendChild(pTag);
+        divTag.appendChild(pTag);
+
+        // deleteButtonを作る
+        const buttonTag = document.createElement("button");
+        buttonTag.textContent = "削除";
+
+        buttonTag.onclick = function () {
+          divTag.remove();
+          deleteFromLocalStorage(memoText);
+        };
+
+        divTag.appendChild(buttonTag);
+
+        // pタグとbuttonタグを持つdivタグをcontainerに入れる.
+        divMemoDisplay.appendChild(divTag);
       };
 
       const saveToLocalStorage = function () {
         localStorage.memos = JSON.stringify(memos);
+      };
+
+      const deleteFromLocalStorage = function (memoText) {
+        for (let i = 0; i < memos.length; i++) {
+          if (memos[i] === memoText) {
+            memos.splice(i, 1);
+          }
+        }
+        saveToLocalStorage();
       };
 
       window.onload = function () {
