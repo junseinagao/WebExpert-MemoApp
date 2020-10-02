@@ -41,21 +41,41 @@
       const buttonMemoReserve = document.getElementById("button-memo-reserve");
       const divMemoDisplay = document.getElementById("div-memo-display");
 
+      let memos = []; // ["メモ1","メモ2"]
+
       // button が押された時のイベントを記述.
       //    1.inputタグの中身を保存する.
       //    2.inputタグの中身をpタグのtextContentに入れる.
       //    3.pタグをdivタグに追加する。
+      //    4.localstorageに保存する。
       buttonMemoReserve.onclick = function () {
-        addMemoToNewTag();
+        addMemoToNewTag(inputMemoText.value);
+        memos.push(inputMemoText.value);
+        saveToLocalStorage();
       };
 
-      const addMemoToNewTag = function () {
+      const addMemoToNewTag = function (memoText) {
         //    2-1.pタグを作る
         const pTag = document.createElement("p");
         //    2-2.pタグのtextContentにinputMemoText.valueを入れる.
-        pTag.textContent = inputMemoText.value;
+        pTag.textContent = memoText;
         //    2-3.pタグをdivタグに入れる
         divMemoDisplay.appendChild(pTag);
+      };
+
+      const saveToLocalStorage = function () {
+        localStorage.memos = JSON.stringify(memos);
+      };
+
+      window.onload = function () {
+        if (localStorage["memos"] != []) {
+          memos = JSON.parse(localStorage.memos);
+
+          for (let i = 0; i < memos.length; i++) {
+            const memo = memos[i];
+            addMemoToNewTag(memo);
+          }
+        }
       };
     </script>
   </body>
