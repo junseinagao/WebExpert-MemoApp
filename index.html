@@ -3,106 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      .memocho {
-        border: solid 1px black;
-      }
-
-      .memocho__textInput {
-        margin-bottom: 1rem;
-      }
-
-      .memocho__memoDisplay {
-        background-color: pink;
-      }
-
-      .memocho__memoDisplay p {
-        margin-bottom: 1.5rem;
-      }
-    </style>
-    <title>メモ帳</title>
+    <title>MEMO APP</title>
   </head>
   <body>
-    <div class="memocho">
-      <h1>メモ帳</h1>
-      <input type="text" id="input-memo-text" class="memocho__textInput" />
-      <button id="button-memo-reserve" class="memocho__reserveButton">
-        保存
-      </button>
-      <div id="div-memo-display" class="memocho__memoDisplay">
-        <!-- このdivタグの中にpタグを追加して書いたメモを保存
-        <p>こんな風に</p>
-        <p>追加していく</p> -->
-      </div>
+    <h1>メモ帳</h1>
+    <input type="text" id="memo-input" />
+    <button id="save-button">保存する</button>
+    <div id="container">
+      <div></div>
     </div>
-    <script>
-      // 必要な HTML ELEMENT を取得
-      const inputMemoText = document.getElementById("input-memo-text");
-      const buttonMemoReserve = document.getElementById("button-memo-reserve");
-      const divMemoDisplay = document.getElementById("div-memo-display");
-
-      let memos = []; // ["メモ1","メモ2"]
-
-      // button が押された時のイベントを記述.
-      //    1.inputタグの中身を保存する.
-      //    2.inputタグの中身をpタグのtextContentに入れる.
-      //    3.pタグをdivタグに追加する。
-      //    4.localstorageに保存する。
-      buttonMemoReserve.onclick = function () {
-        addMemoToNewTag(inputMemoText.value);
-        memos.push(inputMemoText.value);
-        saveToLocalStorage();
-      };
-
-      const addMemoToNewTag = function (memoText) {
-        // divを作る.
-        const divTag = document.createElement("div");
-
-        //    2-1.pタグを作る
-        const pTag = document.createElement("p");
-        //    2-2.pタグのtextContentにinputMemoText.valueを入れる.
-        pTag.textContent = memoText;
-        //    2-3.pタグをdivタグに入れる
-        divTag.appendChild(pTag);
-
-        // deleteButtonを作る
-        const buttonTag = document.createElement("button");
-        buttonTag.textContent = "削除";
-
-        buttonTag.onclick = function () {
-          divTag.remove();
-          deleteFromLocalStorage(memoText);
-        };
-
-        divTag.appendChild(buttonTag);
-
-        // pタグとbuttonタグを持つdivタグをcontainerに入れる.
-        divMemoDisplay.appendChild(divTag);
-      };
-
-      const saveToLocalStorage = function () {
-        localStorage.memos = JSON.stringify(memos);
-      };
-
-      const deleteFromLocalStorage = function (memoText) {
-        for (let i = 0; i < memos.length; i++) {
-          if (memos[i] === memoText) {
-            memos.splice(i, 1);
-          }
-        }
-        saveToLocalStorage();
-      };
-
-      window.onload = function () {
-        if (localStorage["memos"] != []) {
-          memos = JSON.parse(localStorage.memos);
-
-          for (let i = 0; i < memos.length; i++) {
-            const memo = memos[i];
-            addMemoToNewTag(memo);
-          }
-        }
-      };
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>
