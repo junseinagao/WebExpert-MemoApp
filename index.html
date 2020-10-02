@@ -46,23 +46,16 @@
       //    2.inputタグの中身をpタグのtextContentに入れる.
       //    3.pタグをdivタグに追加する。
       buttonMemoReserve.onclick = function () {
-        // 1.inputタグの中身を保存する.
-        //    (inputElemnt.valueの存在をconsole.dirで探す.)
-        const memoContent = inputMemoText.value;
+        addMemoToNewTag();
+      };
 
-        // 2.inputタグの中身をpタグのtextContentに入れる.
+      const addMemoToNewTag = function () {
         //    2-1.pタグを作る
         const pTag = document.createElement("p");
-        //    2-2.pタグのtextContentにmemoContentを入れる.
-        pTag.textContent = memoContent;
-
+        //    2-2.pタグのtextContentにinputMemoText.valueを入れる.
+        pTag.textContent = inputMemoText.value;
         //    2-3.pタグをdivタグに入れる
         divMemoDisplay.appendChild(pTag);
-
-        // デバッグ用のconsole.log
-        console.dir(memoContent);
-        console.dir(pTag);
-        console.log(pTag.textContent);
       };
     </script>
   </body>
